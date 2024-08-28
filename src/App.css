@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* .navBar a.active {
+  color: red;
+  border-bottom: 1px solid #e9ecef;
+}
+ */

@@ -1,15 +1,21 @@
 /** @type {import('tailwindcss').Config} */
-
+import daisyui from 'daisyui';
 import plugin from 'tailwindcss/plugin';
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,html,css}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
+    },
   },
   plugins: [
+    daisyui,
     plugin(({addComponents}) => {
       const buttons = {
         '.btn': {
