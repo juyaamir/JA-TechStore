@@ -1,39 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import image23 from '../images/image-1.jpg';
 
 const ImageSlider = ({ images }) => {
+  
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const leftArrowStyles = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    left: '32px',
-    fontSize: '45px',
-    fontWeight: 'bold',
-    color: 'white',
-    cursor: 'pointer',
-    zIndex: 1,
-  };
-
-  const rightArrowStyles = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    right: '32px',
-    fontSize: '45px',
-    fontWeight: 'bold',
-    color: 'white',
-    cursor: 'pointer',
-    zIndex: 1,
-  };
 
   const slideStyle = {
     height: '100%',
     backgroundImage: `url(${images[currentIndex]})`,
+    backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    backgroundPosition: 'center',
     borderRadius: '10px',
+    cursor: 'pointer',
   };
 
   const sliderStyle = {
@@ -58,14 +36,14 @@ const ImageSlider = ({ images }) => {
       const isLastImage = currentIndex === images.length - 1;
       const newIndex = isLastImage ? 0 : currentIndex + 1;
       setCurrentIndex(newIndex);
-    }, 3000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
     <div style={sliderStyle} className='group'>
-      <div style={leftArrowStyles} onClick={goToPrevious} className='hidden group-hover:block'>&lt;</div>
-      <div style={rightArrowStyles} onClick={goToNext} className='hidden group-hover:block'>&gt;</div>
+      <div  onClick={goToNext} className='right-8 arrowStyles'>&gt;</div>
+      <div onClick={goToPrevious} className='left-8 arrowStyles'>&lt;</div>
       <div style={slideStyle}></div>
       <div className='flex justify-center my-2 gap-4'>
         {images.map((_, index) => (

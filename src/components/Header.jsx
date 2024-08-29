@@ -1,21 +1,26 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../../src/assets/ja.jpg';
 import ThemeController from './ThemeController';
 import Navbar from './Navbar';
 const message = [
-  {label: 'Welcome To Our Store JA-TechStore'},
-  {label: 'Save up to 50% on select major appliances. Ends 9/11 shop now'},
+  {label: 'Welcome To JA-TechStore, The Best Place To Shop For Your Electronics!'},
+  {label: 'Save up to 50% on select major appliances, SHOP NOW!'},
 ]
 const Header = () => {
+  const[messageIndex, setMessageIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMessageIndex((messageIndex) =>  messageIndex === 0 ? 1 : 0 );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div>
       <div>
-        <h4 className="bg-cyan-900 text-white p-2 text-center font-thin">
-          {message.map((item, index) => (
-            <span key={index}>{item.label}</span>
-          ))}
-        </h4>
+        <Link to='/deals-of-the-day' className="bg-cyan-900  p-2 text-center text-2xl font-bold prompt-animation block ">
+          {message[messageIndex].label}
+        </Link>
       </div>
       <header className="bg-base-300">
         <div className="flex flex-wrap justify-between gap-8 items-center p-3">

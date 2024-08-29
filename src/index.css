@@ -2,6 +2,40 @@
 @import './styles/base.css';
 @import './styles/components.css';
 
+/*Header prompt navigation*/
+.prompt-animation {
+    color: white;
+    animation: color 1s infinite alternate ease-in-out forwards;
+}
+@keyframes color {
+    0% {color: white;}
+    25% {color: red;}
+    50% {color: yellow;}
+    75% {color:chartreuse;}
+    100% {color:deeppink}
+}
 
+/*Home slider animation*/
+.homeSliderStyles {
+    max-width: 1200px;
+    width: 100vw;
+    height: 380px;
+    margin: 0 auto;
+}
 
+/* Left and right arrow style in Home component*/
+.arrowStyles {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    visibility: hidden;
+}
 
+.group:hover .arrowStyles {
+    visibility: visible;
+}
