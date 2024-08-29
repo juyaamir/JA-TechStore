@@ -3,14 +3,19 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../src/assets/ja.jpg';
 import ThemeController from './ThemeController';
 import Navbar from './Navbar';
-
+const message = [
+  {label: 'Welcome To Our Store JA-TechStore'},
+  {label: 'Save up to 50% on select major appliances. Ends 9/11 shop now'},
+]
 const Header = () => {
   return (
     <div>
       <div>
-        <h3 className="bg-cyan-900 text-white p-2 text-center font-thin">
-          Welcome To Our Store JA-TechStore,Save up to 50% on select major appliances. Ends 9/11 shop now
-        </h3>
+        <h4 className="bg-cyan-900 text-white p-2 text-center font-thin">
+          {message.map((item, index) => (
+            <span key={index}>{item.label}</span>
+          ))}
+        </h4>
       </div>
       <header className="bg-base-300">
         <div className="flex flex-wrap justify-between gap-8 items-center p-3">
