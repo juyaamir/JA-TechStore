@@ -1,12 +1,20 @@
-import React from 'react'
 import MainLayout from './components/mainLayout'
+import { ThemeProvider} from './Context'
 
 const App = () => {
+ 
   return (
-    <div>
-      <MainLayout />
-
+    <ThemeProvider>
+    <div >
+      <MainLayout  />
     </div>
+    </ThemeProvider>
+
+
+  
+
+
+
   )
 }
 
