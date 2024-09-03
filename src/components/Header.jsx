@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <div style={{color: theme === 'light' ? '#000': '#fff'}}>
       <div>
-        <Link to='/deals-of-the-day' className="bg-cyan-900  p-2 text-center text-2xl font-bold prompt-animation block ">
+        <Link to='/deals-of-the-day' className="bg-cyan-900  p-2 text-center md:text-xl lg:text-2xl font-bold prompt-animation sm:h-auto h-14 flex justify-center items-center">
           {message[messageIndex].label}
         </Link>
       </div>
@@ -45,7 +45,7 @@ const Header = () => {
             <button className="bg-cyan-300 rounded-r px-4 py-2">Search</button>
           </div>
           <div className="flex flex-wrap  justify-end gap-2">
-            <NavLink to="/wishlist" className="px-4 py-2 relative">
+            <NavLink to="/favorite" className="px-4 py-2 relative">
               Favorites
               <span className="absolute top-0 right-0 bg-cyan-900 text-white rounded-full text-xs px-2 font-thin">
                 2
@@ -57,12 +57,13 @@ const Header = () => {
                 3
               </span>
             </NavLink>
-            <NavLink to="/login" className="px-4 py-2 ">
+            <NavLink to="/login" className="px-4 py-2 " title='signIn'>
               Sign In
             </NavLink>
             <button 
             style={{ padding: '0.5rem 1rem', borderRadius: '5px', fontSize: '2rem', transition: 'color 0.3s ease-in-out'}}      
             onClick={toggleTheme}
+            title='Toggle Theme'
             >{theme === 'light' ? <CiLight /> : <CiDark />}</button>
           </div>
         </div>
