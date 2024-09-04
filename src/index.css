@@ -41,6 +41,13 @@
 }
 
 
-
+@media screen and (max-width: 768px) {
+    .mobileNavbar {
+        display: block;
+    }
+    .desktopNavbar {
+        display: none;
+    }
+}
 
 

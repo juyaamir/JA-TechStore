@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import navbarData from '../data/navbarData';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useTheme } from '../Context';
-const Navbar = () => {
+const DesktopNavbar = () => {
   const {theme} = useTheme();
   return (
-    <nav className=" p-2">
+    <nav className=" p-2 desktopNavbar">
       <ul className="flex justify-center gap-8 font-bold">
         {navbarData.map((item) => (
           <li key={item.path} className="relative my-4 group" >
@@ -41,4 +41,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DesktopNavbar;

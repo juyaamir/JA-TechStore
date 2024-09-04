@@ -8,7 +8,7 @@ import image8 from '../images/image-8.jpg'
 const images = [image1, image4, image6, image7, image8];
 const HomePage = () => {
   return (
-    <div>HomePage
+    <div>
       <div className='homeSliderStyles'>
         <ImageSlider images={images} />
       </div>
