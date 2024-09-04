@@ -25,20 +25,20 @@ const Header = () => {
   }, []);
   return (
     <div style={{color: theme === 'light' ? '#000': '#fff'}}>
-      <div>
+      <div className='text-center '>
         <Link to='/deals-of-the-day' className="bg-cyan-900  py-2 text-center md:text-xl lg:text-2xl font-bold prompt-animation sm:h-auto h-14 flex justify-center items-center ">
           {message[messageIndex].label}
         </Link>
       </div>
-      <header className="">
-        <div className="flex flex-wrap justify-between gap-3 items-center p-1">
-          <div title='JA-TechStore.com'>
+      <header className="mt-2">
+        <div className="flex flex-wrap justify-between gap-1 items-center p-1">
+          <div title='JA-TechStore.com' className='logoPosition'>
             <NavLink to="/" className="flex items-center">
               <img src={logo} alt="logo" className="h-12 w-12 rounded-full"  />
-              <h3 className='hidden sm:block'>JA-TechStore</h3>
+              <h3>JA-TechStore</h3>
             </NavLink>
           </div>
-          <div className="flex">
+          <div className="sm:flex  hidden">
             <input
               type="search"
               className="border border-gray-400 py-2 w-32 md:w-56 lg:w-96 rounded-l-lg"
@@ -47,7 +47,7 @@ const Header = () => {
             />
             <button className="border border-gray-400 bg-cyan-300 rounded-r-lg p-2"><CiSearch /></button>
           </div>
-          <div className="flex justify-center gap-2 ">
+          <div className="flex justify-end gap-3 headerIcons ">
             <NavLink to="/favorite" className="px-4 py-2 relative text-3xl">
             <TbHeartPlus />
               <span className="absolute top-0 right-0 bg-cyan-900 text-white rounded-full text-xs px-2 font-thin">
@@ -70,9 +70,12 @@ const Header = () => {
             title='Toggle Theme'
             >{theme === 'light' ? <CiLight /> : <CiDark />}</button>
           </div>
+
         </div>
-        <DesktopNavbar /> 
-        <MobileNavbar />
+          <div>
+            <DesktopNavbar /> 
+            <MobileNavbar />
+          </div>
       </header>
     </div>
   );
