@@ -22,7 +22,8 @@ const MobileNavbar = () => {
         </p>
       </button>
         ):(
-        <button onClick={() => setShowMenu(!showMenu)} className='text-xl p-2'><span className=''>X</span> Menu</button>
+        <button onClick={() => setShowMenu(!showMenu)} className='text-2xl p-2 flex gap-4'>
+          <span className='rounded-full px-2 hover:text-red-500'>X</span>Menu</button>
         ) 
       } 
       {
