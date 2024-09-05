@@ -52,7 +52,7 @@ const handleNavigate = () => {
                 <Link type='button' className='bg-cyan-700 hover:bg-green-500 text-white p-1 w-full rounded-md text-center'
                 onClick={() => setShowEmail(!showEmail)}
                 >Continue</Link>
-                <p className='text-sm'>
+                <p className='text-sm my-4'>
                 By continuing, you agree to JA-TechStore's <Link to='/condition-of-use' className='text-cyan-600 underline hover:text-green-500'>Conditions of Use</Link> and <Link to='/condition-of-use' className='text-cyan-600 underline hover:text-green-500'>Privacy Notice.</Link>
               </p>
               </div>

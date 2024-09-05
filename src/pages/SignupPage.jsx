@@ -66,7 +66,7 @@ const Signup = () => {
                 <button type='Submit' className='bg-cyan-700 hover:bg-green-500 text-white p-1 w-full rounded-md'
                   onClick={() => setShowEmail(!showEmail)}
                   >Register now</button>
-                <p className='text-sm'>
+                <p className='text-sm my-4'>
                   By creating an account, you agree to JA-TechStore's <Link to='/condition-of-use' className='text-cyan-600 underline hover:text-green-500'>Conditions of Use</Link> and <Link to='/condition-of-use' className='text-cyan-600 underline hover:text-green-500'>Privacy Notice.</Link>
                 </p>
               </div>
