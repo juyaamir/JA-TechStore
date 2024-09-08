@@ -1,9 +1,14 @@
 import React, {useState} from 'react'
 import logo from '../assets/ja.jpg'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [showEmail, setShowEmail] = useState(true);
+  //when user enter invalid email or password, we can show the error message
+  const [error, setError] = useState('');
+
   const [input, setInput] = useState({
     email: '',
     password: '',
@@ -15,15 +20,26 @@ const handleInput = (e) => {
       [name]: value,
     })
 };
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
+  try {
+    const res = await axios.post(`http://localhost:8000/api/auth/login`, input);
+    console.log('Response: ', res.data);
+
+
+
     setInput({
       email: '',
       password: '',
     });
-    setShowEmail(!showEmail);
-    navigate('/');
+    /* navigate('/dashboard'); */
+    navigate('/')
+
+  } catch (err) {
+    console.log('Error: ', err.response);
+    setError(err.response.data.message);
+  }
+
 };
 const handleNavigate = () => {
     navigate(-1);
@@ -41,6 +57,7 @@ const handleNavigate = () => {
         <div className='flex flex-col gap-4'>
           <form className='flex flex-col gap-5 border border-gray-300  p-4 rounded-lg shadow-lg' onSubmit={handleSubmit}>
             <h1 className=''>Sign In</h1>
+            {error && <p className='text-red-500'>{error}</p> }
             {!showEmail && <p>{input.email} <Link className='text-cyan-700 hover:text-green-500' 
             onClick={handleNavigate}>Change</Link> </p> }
             {

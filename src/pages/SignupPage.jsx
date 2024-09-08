@@ -1,14 +1,17 @@
 import React, { useState} from 'react';
 import logo from '../assets/ja.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const Signup = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     name: '',
     email: '',
     password: '',
   });
+  const [response, setResponse] = useState(null);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -22,19 +25,23 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res =  await axios.post('http://localhost:8000/api/auth/register', input);
-      console.log('response is: ', res);
       setInput({
         name: '',
         email: '',
         password: '',
       });
+      setResponse(res.data.message);
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
+  
   return (
     <div className='w-80 '>
+      {response && <p>{response}</p>}
       <div>
         <Link to='/' className='flex  items-center justify-center my-3'>
           <img src={logo} alt="logo" className="h-14 w-14 rounded-full" />
