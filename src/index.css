@@ -63,3 +63,7 @@
     }
 
 }
+.dashboard-list li:hover {
+    text-decoration: underline;
+    color: rgb(233, 157, 15);
+}

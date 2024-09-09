@@ -6,6 +6,7 @@ import axios from 'axios'
 const LoginPage = () => {
   const navigate = useNavigate();
   const [showEmail, setShowEmail] = useState(true);
+  
   //when user enter invalid email or password, we can show the error message
   const [error, setError] = useState('');
 

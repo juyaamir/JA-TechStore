@@ -4,6 +4,8 @@ import logo from '../../src/assets/ja.jpg';
 import { CiLight, CiDark } from "react-icons/ci";
 import DesktopNavbar from './desktopNavbar';
 import MobileNavbar from './mobileNavbar';
+import DashboardPage from '../pages/dashboardPage.jsx';
+
 import { useTheme } from '../Context';
 import { CgProfile } from "react-icons/cg";
 import { LiaShoppingBagSolid } from "react-icons/lia";
@@ -19,6 +21,7 @@ const Header = () => {
   const [messageIndex, setMessageIndex] = useState(0);
   const { theme, toggleTheme } = useTheme();
   const [showLogin, setShowLogin] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const handleToggle = (e) => {
     e.preventDefault();
@@ -43,7 +46,7 @@ const Header = () => {
           {message[messageIndex].label}
         </Link>
       </div>
-      <header className="mt-2">
+      <header className="mt-2 mx-4">
         <div className="flex flex-wrap justify-between gap-1 items-center p-1">
           <div title='JA-TechStore.com' className='logoPosition'>
             <Link to="/" className="flex items-center">
@@ -67,23 +70,25 @@ const Header = () => {
                 2
               </span>
             </Link>
-            <Link to="/cart" className="relative text-3xl px-4 py-2">
+            <Link to="/cart" className="relative text-3xl px-4 py-2 ">
               <LiaShoppingBagSolid />
               <span className="absolute top-0 right-0 bg-cyan-900 text-white rounded-full text-xs px-2 font-thin">
                 3
               </span>
             </Link>
-            <div className='relative flex flex-col'>
+
+            {
+              loggedIn ? (
+              <DashboardPage setLoggedIn={setLoggedIn} />
+              ) : (
+          <div className='relative flex flex-col'>
             <button className="px-4 py-2 text-3xl relative" title='signIn' onClick={handleToggle}>
               <CgProfile />
-
-
             </button>
             {showLogin && (
               <div 
               className="absolute flex flex-col gap-2 top-10 -right-9 p-2 rounded-lg shadow-lg w-36 
               text-center border-x-2 border-x-gray-300 z-50 "
-             
               >
                 <button onClick={handleCloseLogin} className="text-2xl self-end hover:text-red-400">X</button>
                 <Link to="/login" className="block px-2 py-1 text-white bg-cyan-700 hover:bg-cyan-800 rounded-lg" onClick={handleCloseLogin}>Login</Link>
@@ -92,10 +97,13 @@ const Header = () => {
               </div>
             )}
             </div>
+              )
+            }
+            
             
 
-            <Link to="/login" >
-            </Link>
+{/*             <Link to="/login" >
+            </Link> */}
             <button
               className=''
               style={{ padding: '0.5rem ', borderRadius: '5px', fontSize: '2rem', transition: 'color 0.3s ease-in-out' }}
