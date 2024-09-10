@@ -67,3 +67,26 @@
     text-decoration: underline;
     color: rgb(233, 157, 15);
 }
+
+/* Account settings */
+.main-container {
+    width: 30rem;
+}
+.account-settings-edit {
+    padding: 0.25rem 1.5rem;
+    border: 1px solid #a5a3a3;
+    border-radius: 1rem;
+    transition: all 0.3s;
+}
+.account-settings-edit:hover {
+    color: #ec7709;
+    border-color: #ec7709;
+}
+.account-settings-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
