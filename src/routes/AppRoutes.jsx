@@ -20,7 +20,8 @@ const AppRoutes = () => {
       <Route path = '/cart' element = {<CartPage />} />
       <Route path = '/favorite' element = {<FavoritePage />} />
       <Route path = '/profile/myprofile' element = {<ProfilePage />} />
-      <Route path = '/account/settings' element = {<AccountSettingsPage />} />
+      <Route path = '/account/settings' element = {<AccountSettingsPage />} /> 
+     
       <Route path='/orders'  element={<OrderHistoryPage />}/>
       <Route path='/browsing-history' element={<BrowsingHistory />} />
       <Route path='*' element = {<NotFoundPage />} />
