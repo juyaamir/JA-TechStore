@@ -1,8 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/ja.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -10,6 +9,7 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
+    role: 'user', // Default role
   });
   const [response, setResponse] = useState(null);
 
@@ -24,11 +24,14 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res =  await axios.post('http://localhost:8000/api/auth/register', input);
+      console.log('Sending data:', input);
+      const res = await axios.post('http://localhost:8000/api/auth/register', input);
+      console.log('Response received:', res);
       setInput({
         name: '',
         email: '',
         password: '',
+        role: 'user', // Reset to default role
       });
       setResponse(res.data.message);
       setTimeout(() => {
@@ -38,7 +41,7 @@ const Signup = () => {
       console.error('Error:', error);
     }
   };
-  
+
   return (
     <div className='w-80 '>
       {response && <p>{response}</p>}
@@ -69,6 +72,14 @@ const Signup = () => {
               <input type="password" id='password' name='password' value={input.password} className='border border-gray-300 rounded-md p-1'
                 onChange={handleInput} required
                 placeholder='At least 6 characters' />
+            </div>
+            <div className='flex flex-col gap-1'>
+              <label htmlFor="role">Role:</label>
+              <select id='role' name='role' value={input.role} className='border border-gray-300 rounded-md p-1'
+                onChange={handleInput} required>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
             </div>
             <button type='submit' className='bg-cyan-700 hover:bg-green-500 text-white p-1 w-full rounded-md'>
               Register now
