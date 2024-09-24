@@ -12,6 +12,8 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { TbHeartPlus } from "react-icons/tb";
 import { CiSearch } from "react-icons/ci";
 
+import { useAuth } from '../Context.jsx';
+
 const message = [
   { label: 'Welcome To JA-TechStore, The Best Place To Shop For Your Tech Needs' },
   { label: 'Save up to 50% on select major appliances, SHOP NOW!' },
@@ -21,7 +23,9 @@ const Header = () => {
   const [messageIndex, setMessageIndex] = useState(0);
   const { theme, toggleTheme } = useTheme();
   const [showLogin, setShowLogin] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+ // const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+ const { isAuthenticated } = useAuth(); 
 
   const handleToggle = (e) => {
     e.preventDefault();
@@ -78,8 +82,8 @@ const Header = () => {
             </Link>
 
             {
-              loggedIn ? (
-              <DashboardPage setLoggedIn={setLoggedIn} />
+              isAuthenticated ? (
+              <DashboardPage />
               ) : (
           <div className='relative flex flex-col'>
             <button className="px-4 py-2 text-3xl relative" title='signIn' onClick={handleToggle}>
@@ -100,10 +104,6 @@ const Header = () => {
               )
             }
             
-            
-
-{/*             <Link to="/login" >
-            </Link> */}
             <button
               className=''
               style={{ padding: '0.5rem ', borderRadius: '5px', fontSize: '2rem', transition: 'color 0.3s ease-in-out' }}

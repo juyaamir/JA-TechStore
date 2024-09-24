@@ -1,13 +1,15 @@
 import MainLayout from './components/mainLayout'
-import { ThemeProvider} from './Context'
+import { ThemeProvider, AuthProvider } from './Context'
 
 const App = () => {
  
   return (
     <ThemeProvider>
+      <AuthProvider>
     <div >
       <MainLayout  />
     </div>
+    </AuthProvider>
     </ThemeProvider>
 
 

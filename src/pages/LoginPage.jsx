@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import logo from '../assets/ja.jpg'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useAuth } from '../Context.jsx'
 
 const LoginPage = () => {
+  const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [showEmail, setShowEmail] = useState(true);
   
@@ -27,6 +29,10 @@ const handleSubmit = async (e) => {
     const res = await axios.post(`http://localhost:8000/api/auth/login`, input);
     console.log('Response: ', res.data);
 
+    setIsAuthenticated(true);
+
+    //save the token in the local storage
+    localStorage.setItem('token', res.data.token);
 
 
     setInput({

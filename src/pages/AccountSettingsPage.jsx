@@ -1,14 +1,14 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
+import axios from 'axios';
 
 
 
 const AccountSettingsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editField, setEditField] = useState('');
-  const [userData, setUserData] = useState({
-    name: 'Amir',
-    email: 'amir@gmail.com',
-  })
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState('');
+
   const handleEditClick = (field) => {
     setEditField(field);
     setIsEditing(true);
@@ -25,6 +25,34 @@ const AccountSettingsPage = () => {
     setUserData({
       ...userData, [editField]: e.target.value
     })
+  };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(!token) {
+      setError('You are not authorized to view this information');
+      return;
+    };
+    const getUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/auth/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUserData(response.data.profile);
+        console.log('User Data: ', response.data.profile);
+      } catch (error) {
+        console.log(`Error: ${error}`);
+        setError(`An error occurred while trying to get your profile`);
+      }
+    };
+    getUserData();
+  }, []);
+  if(error) {
+    return <p className='text-red-500 text-center'>{error}</p>
+  };
+  if(!userData) {
+    return <p className='text-center'>Loading............</p>
   }
   return (
     <div >

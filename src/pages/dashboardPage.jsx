@@ -1,15 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import profile from '../assets/profile.jpeg'
 import { ImProfile } from "react-icons/im";
 import { SlSettings } from "react-icons/sl";
 import { PiSignOutBold } from "react-icons/pi";
 import { useTheme } from '../Context';
-const DashboardPage = ({setLoggedIn}) => {
+import { useAuth } from '../Context.jsx'
+import axios from 'axios';
+const DashboardPage = () => {
   const{theme} = useTheme();
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
+  const handleSignOut = () => {
+    setIsAuthenticated(false);
+    navigate('/signup');
+    localStorage.removeItem('token');
+    
+  }
+
+  // get profile from backend
+  const [error, setError] = useState('');
+  const [myProfile, setMyProfile] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(!token) {
+    //  setError('You are not authorized to view this page');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+      return;
+    }
+    const getProfile = async () => {
+      try {
+        const res = await axios.get('http://localhost:8000/api/auth/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log('Profile: ', res.data);
+        setMyProfile(res.data.profile);
+      } catch (error) {
+        console.log('Error: ', error);
+        setError('An error occurred while trying to get your profile');
+      }
+    };
+    getProfile();
+  }, []);
+  if(error) {
+    return <p className='text-red-500 text-center'>{error}</p>
+  };
+  if(!myProfile) {
+    return <p className='text-center'>Loading............</p>
+  }
+
   return (
     <div className='text-xl relative group '>
-      <p className=' px-4 py-2 hover:cursor-pointer'>Hello, Juya</p>
+      <p className=' px-4 py-2 hover:cursor-pointer'>Hi, { myProfile.name }</p>
       
       <div className=' border border-gray-400 w-96 bg top-full -right-0 shadow-lg z-10 hidden group-hover:block p-6 rounded absolute'
       style={{color: theme === 'light' ? '#000' : '#fff', backgroundColor: theme === 'light' ? '#fff' : '#000' }}
@@ -31,9 +77,7 @@ const DashboardPage = ({setLoggedIn}) => {
               </Link>
             </li>
             <li>
-              <Link onClick={()=> {
-                setLoggedIn(false);
-              }} className='flex items-center gap-2'>
+              <Link  className='flex items-center gap-2' onClick={handleSignOut}>
               <PiSignOutBold className='text-xl' /> <span>Sign Out</span>
               </Link>
             </li>
