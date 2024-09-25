@@ -11,9 +11,11 @@ const DashboardPage = () => {
   const{theme} = useTheme();
   const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
+
   const handleSignOut = () => {
+    navigate('/');
     setIsAuthenticated(false);
-    navigate('/signup');
+    
     localStorage.removeItem('token');
     
   }
@@ -77,9 +79,9 @@ const DashboardPage = () => {
               </Link>
             </li>
             <li>
-              <Link  className='flex items-center gap-2' onClick={handleSignOut}>
+              <button  className='flex items-center gap-2' onClick={handleSignOut}>
               <PiSignOutBold className='text-xl' /> <span>Sign Out</span>
-              </Link>
+              </button>
             </li>
           
             <li></li>

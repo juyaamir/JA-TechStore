@@ -24,7 +24,8 @@ const OrderHistoryPage = () => {
       } catch (error) {
         console.log(`Error: ${error}`);
         setError(`An error occurred while trying to get users ${error.message}`);
-      }
+      };
+
     };
     getUsers();
   }, []);
