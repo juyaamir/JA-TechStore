@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 createRoot(document.getElementById('root')).render(
-  <Router>
+  <Router basename='/JA-TechStore' >
     <StrictMode>
     <App />
   </StrictMode>
